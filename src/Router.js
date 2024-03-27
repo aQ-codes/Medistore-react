@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     { path: 'home', element: <Home/> },
     { path: 'medicines', element: <ListMedicine/> },
     { path: 'medicines/add', element: <AddMedicine/> },
-    { path: 'medicines/edit/:id', element: <EditMedicine/> },
+    { path: 'medicines/:medId/edit', element: <EditMedicine/> },
   
 ]);
 

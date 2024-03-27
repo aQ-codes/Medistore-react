@@ -11,6 +11,8 @@ function ListMedicine() {
 
   var user = useSelector(store=>store.auth.user);
   var [meds, setMeds]=useState([]);
+  var [errorMessage, setErrorMessage] = useState('');
+
   function fetchMeds(){
       axios.get('https://medicalstore.mashupstack.com/api/medicine',{
         headers:{'Authorization':"Bearer "+ user.token}
@@ -26,9 +28,6 @@ function ListMedicine() {
 
 
 
-
-
-
   return (
     <div>
       <Navbar/>
@@ -40,10 +39,10 @@ function ListMedicine() {
         </div>
         <div className="row">
           <div className="col-8 offset-2">
-            <Link to="" className="btn btn-info mb-2">
+            <Link to="/medicines/add" className="btn btn-info mb-2">
               Create Medicine
             </Link>
-             {meds.map(med =><ListItem key={med.id} medicine={med} refresh={fetchMeds}/>)} 
+            
             <table class="table ">
               <tr>
                 <th>Medicine</th>
@@ -55,8 +54,12 @@ function ListMedicine() {
                 <th>Remove</th>
               </tr>
               <tbody>
+              
+                {meds.map(med =>  <tr><ListItem key={med.id} medicine={med} refresh={fetchMeds}/>  </tr> )} 
+                
 
               </tbody>
+            
             </table>
           </div>
         </div>
