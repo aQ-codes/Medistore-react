@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../store/authSlice";
 import Navbar from "../Navbar";
 import {useNavigate} from "react-router-dom";
+import checkGuest from "./checkGuest";
 
 function Login() {
     var [email, setEmail] = useState('');
@@ -65,4 +66,5 @@ function Login() {
     </div>)
 }
 
-export default Login;
+
+export default checkGuest(Login);
