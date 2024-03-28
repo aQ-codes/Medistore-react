@@ -9,13 +9,15 @@ import store from "./store/store";
 
 import { RouterProvider } from 'react-router-dom';
 import Router from './Router';
+import AutoLogin from "./components/auth/AutoLogin";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={Router}>
-      </RouterProvider>
+    <AutoLogin>
+      <RouterProvider router={Router}/>
+      </AutoLogin>
     </Provider>
   </React.StrictMode>,
 );

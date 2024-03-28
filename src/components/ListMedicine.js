@@ -82,7 +82,7 @@ function ListMedicine() {
             </Link>
 
             <form>
-              <label>Search Blog: </label>
+              <label>Search Medicines :  &nbsp;</label>
               <input
                 type="text"
                 value={SearchTerm}
@@ -90,7 +90,7 @@ function ListMedicine() {
               />
               &nbsp;
               <button
-                className="btn btn-small btn-success"
+                className="btn btn-small btn-outline-success"
                 type="button"
                 onClick={handleSearch}
               >

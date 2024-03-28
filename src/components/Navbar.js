@@ -7,7 +7,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { removeUser } from "../store/authSlice";
 
 function Navbar() {
+  
   var user = useSelector((store) => store.auth.user);
+  // console.log(user)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   function logout() {
@@ -19,14 +21,15 @@ function Navbar() {
           headers: { Authorization: "Bearer " + user.token },
         }
       );
+      
       dispatch(removeUser());
       navigate("/login");
     }
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-
+    
+    <nav className="navbar navbar-expand-lg navbar-light bg-light ">
       <div className="navbar-brand">
         <img src={logo} height="40" width="80" />
       </div>
@@ -67,6 +70,8 @@ function Navbar() {
               Medicines
             </NavLink>
           </li>
+          
+          {!user ? (
           <li className="nav-item">
             <NavLink
               to={"/register"}
@@ -76,16 +81,21 @@ function Navbar() {
             >
               Register
             </NavLink>
-          </li>
+          </li> ) :('')}
+
         </ul>
       </div>
-      <ul className="navbar-nav ml-auto" style={{ color: "#ffffff" }}>
+
+      <ul className="navbar-nav mx-4" style={{ color: "#ffffff" }}>
           
           {user ? (
-        
+            
             <li className="nav-item">
-              <a className="nav-link active">Logout</a>
+            <span className="navbar-text">{user.email} </span>
+            <NavLink className="nav-link active" onClick={logout}>Logout</NavLink>
+           
             </li>
+
           ) : (
             
             <li className="nav-item">
@@ -101,8 +111,9 @@ function Navbar() {
           )}
           
         </ul>
-      
+        
     </nav>
+  
   );
 }
 
