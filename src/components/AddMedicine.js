@@ -3,16 +3,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import {  useSelector } from "react-redux";
+import checkAuth from "./auth/checkAuth"
+
 
 
 function AddMedicine() {
     var user = useSelector(store=>store.auth.user);
-
+    // console.log(medId)
+    
+    let navigate = useNavigate();
     const [name, setName] = useState('');
     const [company, setCompany] = useState('');
     const [date, setDate] = useState('');
-
-    var navigate = useNavigate()
 
     function addPost() {
         axios.post('https://medicalstore.mashupstack.com/api/medicine',{
@@ -30,7 +32,7 @@ function AddMedicine() {
         <div className="container">
             <div className="row">
                 <div className="col-8 offset-2">
-                    <h1 className="text-center">Create Post</h1>
+                    <h1 className="text-center">Create Medicine</h1>
                     <div className="form-group">
                         <label>Name:</label>
                         <input 
@@ -67,4 +69,5 @@ function AddMedicine() {
     </div>)
 }
 
-export default AddMedicine;
+
+export default checkAuth(AddMedicine);

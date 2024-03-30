@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import {  useSelector } from "react-redux";
+import checkAuth from "./auth/checkAuth"
+
 
 
 function EditMedicine() {
     var user = useSelector(store=>store.auth.user);
 
     const {medId} = useParams();
-    console.log(medId)
+    // console.log(medId)
 
     const [name, setName] = useState('');
     const [company, setCompany] = useState('');
@@ -18,6 +20,7 @@ function EditMedicine() {
     let navigate = useNavigate();
 
     useEffect(()=>{
+        if (user){
         axios.get('https://medicalstore.mashupstack.com/api/medicine/'+medId,{
           headers:{'Authorization':"Bearer "+ user.token}
        }).then(response=>{
@@ -26,6 +29,7 @@ function EditMedicine() {
             setDate(response.data.expiry_date);
             console.log(response.data)
         })
+    }
     },[medId]);
 
     function updatemed(){
@@ -83,4 +87,4 @@ function EditMedicine() {
     </div>
 }
 
-export default EditMedicine;
+export default checkAuth(EditMedicine);

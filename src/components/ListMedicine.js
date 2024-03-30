@@ -47,7 +47,7 @@ function ListMedicine() {
       }).then(response=>{
             setMeds(response.data)
             setFilteredMeds(response.data);
-            console.log(response.data)
+            // console.log(response.data)
         })
       }
       else{

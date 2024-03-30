@@ -1,9 +1,16 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
+import {  useSelector } from "react-redux";
+
 
 function ListItem(props) {
-    function deletePost() {
-        axios.delete('https://medicalstore.mashupstack.com/api/medicine/'+props.medicine.id).then(response=>{
+    var user = useSelector(store=>store.auth.user);
+
+    function deleteMed() {
+        axios.delete('https://medicalstore.mashupstack.com/api/medicine/'+props.medicine.id,
+        {
+            headers:{'Authorization':"Bearer "+ user.token}
+         }).then(response=>{
             alert(response.data.message)
             props.refresh()
         })
@@ -18,7 +25,10 @@ function ListItem(props) {
                     <Link to={"/medicines/"+props.medicine.id+"/edit"} className="btn btn-outline-info">Edit</Link>
                     </td>
                     <td>
-                    <button className="btn btn-outline-secondary " onClick={deletePost}>Delete</button>
+                    <Link to={"/medicines/"+props.medicine.id+"/view"} className="btn btn-outline-info">View</Link>
+                    </td>
+                    <td>
+                    <button className="btn btn-outline-secondary " onClick={deleteMed}>Delete</button>
                     </td>
               
         

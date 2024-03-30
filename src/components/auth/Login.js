@@ -22,6 +22,7 @@ function Login() {
                 email:email,
                 token:response.data.token
             }
+            console.log(user.token)
             dispatch(setUser(user));
     navigate("/home");
         }).catch(error=>{
